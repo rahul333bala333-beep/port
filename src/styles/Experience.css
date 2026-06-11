@@ -1,0 +1,246 @@
+/* Experience Section */
+.experience-section {
+  min-height: 100vh;
+  padding: 100px 20px;
+  background: linear-gradient(135deg, rgba(15, 12, 41, 0.9), rgba(48, 43, 99, 0.9));
+  display: flex;
+  align-items: center;
+}
+
+.timeline {
+  position: relative;
+  padding: 50px 0;
+  max-width: 900px;
+  margin: 0 auto 80px;
+}
+
+.timeline-center-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, #00d4ff, #7c3aed);
+  transform: translateX(-1px);
+}
+
+.timeline-item {
+  margin-bottom: 50px;
+  position: relative;
+}
+
+.timeline-item.left {
+  text-align: right;
+  padding-right: 50%;
+  padding-bottom: 50px;
+}
+
+.timeline-item.right {
+  text-align: left;
+  padding-left: 50%;
+  padding-bottom: 50px;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: #0f0c29;
+  border: 3px solid #00d4ff;
+  border-radius: 50%;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+}
+
+.timeline-content {
+  padding: 30px;
+  background: rgba(0, 212, 255, 0.05);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.timeline-content:hover {
+  background: rgba(0, 212, 255, 0.1);
+  border-color: rgba(0, 212, 255, 0.5);
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 212, 255, 0.15);
+}
+
+.timeline-content h3 {
+  font-size: 1.5rem;
+  color: #00d4ff;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.timeline-content .company,
+.timeline-content .project-type {
+  font-size: 1rem;
+  color: #7c3aed;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.timeline-content .date {
+  font-size: 0.95rem;
+  color: #b0b0b0;
+  margin-bottom: 15px;
+}
+
+.timeline-content .responsibilities {
+  list-style: none;
+  margin: 0;
+}
+
+.timeline-content .responsibilities li {
+  padding: 8px 0;
+  color: #d0d0d0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  position: relative;
+  padding-left: 20px;
+}
+
+.timeline-content .responsibilities li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: #00d4ff;
+}
+
+/* Certifications */
+.certifications {
+  margin-top: 60px;
+  padding-top: 60px;
+  border-top: 2px solid rgba(0, 212, 255, 0.2);
+}
+
+.certifications h3 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 50px;
+  color: #fff;
+}
+
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.cert-item {
+  padding: 30px;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(0, 212, 255, 0.05));
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  border-radius: 12px;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.cert-item:hover {
+  border-color: rgba(0, 212, 255, 0.5);
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2);
+}
+
+.cert-badge {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #00d4ff, #7c3aed);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cert-item h4 {
+  font-size: 1.1rem;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.cert-item p {
+  font-size: 0.95rem;
+  color: #b0b0b0;
+  margin: 0;
+}
+
+@media (max-width: 968px) {
+  .experience-section {
+    padding: 60px 20px;
+  }
+
+  .timeline-center-line {
+    left: 30px;
+  }
+
+  .timeline-item.left,
+  .timeline-item.right {
+    padding-left: 100px;
+    padding-right: 0;
+    text-align: left;
+  }
+
+  .timeline-item::before {
+    left: 30px;
+  }
+
+  .timeline-content {
+    padding: 20px;
+  }
+
+  .timeline-content h3 {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .experience-section {
+    padding: 40px 15px;
+  }
+
+  .timeline-center-line {
+    left: 15px;
+  }
+
+  .timeline-item.left,
+  .timeline-item.right {
+    padding-left: 50px;
+    margin-bottom: 30px;
+  }
+
+  .timeline-item::before {
+    left: 15px;
+    width: 12px;
+    height: 12px;
+    border-width: 2px;
+  }
+
+  .timeline-content {
+    padding: 15px;
+  }
+
+  .timeline-content h3 {
+    font-size: 1.1rem;
+  }
+
+  .timeline-content .responsibilities li {
+    font-size: 0.9rem;
+  }
+
+  .cert-grid {
+    grid-template-columns: 1fr;
+  }
+}

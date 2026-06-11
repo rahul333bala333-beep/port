@@ -1,0 +1,229 @@
+/* Projects Section */
+.projects-section {
+  min-height: 100vh;
+  padding: 100px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+.project-card {
+  padding: 40px;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(124, 58, 237, 0.1));
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 15px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.project-card:hover {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(124, 58, 237, 0.15));
+  border-color: rgba(0, 212, 255, 0.5);
+  transform: translateY(-15px);
+  box-shadow: 0 25px 60px rgba(0, 212, 255, 0.25);
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.project-header h3 {
+  font-size: 1.5rem;
+  color: #00d4ff;
+  font-weight: 700;
+  margin: 0;
+  flex: 1;
+}
+
+.project-icon {
+  font-size: 2rem;
+  margin-left: 15px;
+}
+
+.project-description {
+  font-size: 1rem;
+  color: #d0d0d0;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.project-features {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.project-features li {
+  padding: 8px 0;
+  color: #b0b0b0;
+  font-size: 0.95rem;
+  position: relative;
+  padding-left: 20px;
+}
+
+.project-features li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #00d4ff;
+  font-weight: bold;
+}
+
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.tech-tag {
+  padding: 6px 14px;
+  background: rgba(0, 212, 255, 0.15);
+  color: #00d4ff;
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.tech-tag:hover {
+  background: rgba(0, 212, 255, 0.3);
+  border-color: rgba(0, 212, 255, 0.6);
+}
+
+.project-link {
+  display: inline-block;
+  margin-top: auto;
+  padding: 12px 24px;
+  background: transparent;
+  color: #00d4ff;
+  border: 2px solid #00d4ff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+  width: fit-content;
+}
+
+.project-link:hover {
+  background: #00d4ff;
+  color: #0f0c29;
+  transform: translateX(5px);
+}
+
+.projects-cta {
+  text-align: center;
+  padding: 40px 20px;
+  background: rgba(0, 212, 255, 0.05);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 15px;
+  margin-top: 40px;
+}
+
+.projects-cta p {
+  font-size: 1.2rem;
+  color: #d0d0d0;
+  margin-bottom: 20px;
+}
+
+.projects-cta .btn {
+  padding: 15px 40px;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 968px) {
+  .projects-section {
+    padding: 60px 20px;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+  }
+
+  .project-card {
+    padding: 30px;
+  }
+
+  .project-header h3 {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .projects-section {
+    padding: 40px 15px;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .project-card {
+    padding: 20px;
+  }
+
+  .project-header {
+    flex-direction: column;
+  }
+
+  .project-header h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  .project-icon {
+    margin-left: 0;
+  }
+
+  .project-description {
+    font-size: 0.95rem;
+  }
+
+  .projects-cta p {
+    font-size: 1rem;
+  }
+}

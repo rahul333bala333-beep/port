@@ -1,0 +1,10 @@
+/* Import all component styles */
+@import './styles/Global.css';
+@import './styles/Navigation.css';
+@import './styles/Hero.css';
+@import './styles/About.css';
+@import './styles/Skills.css';
+@import './styles/Experience.css';
+@import './styles/Projects.css';
+@import './styles/Contact.css';
+@import './styles/ThreeDControlCenter.css';

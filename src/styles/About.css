@@ -1,0 +1,143 @@
+/* About Section */
+.about-section {
+  min-height: 100vh;
+  padding: 100px 20px;
+  background: linear-gradient(135deg, rgba(15, 12, 41, 0.9), rgba(48, 43, 99, 0.9));
+  display: flex;
+  align-items: center;
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.about-text h3 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #00d4ff;
+  font-weight: 700;
+}
+
+.about-text p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #d0d0d0;
+  margin-bottom: 30px;
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.stat {
+  text-align: center;
+  padding: 20px;
+  background: rgba(0, 212, 255, 0.1);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.stat:hover {
+  background: rgba(0, 212, 255, 0.15);
+  border-color: rgba(0, 212, 255, 0.5);
+  transform: translateY(-5px);
+}
+
+.stat h4 {
+  font-size: 1.8rem;
+  color: #00d4ff;
+  margin-bottom: 10px;
+}
+
+.stat p {
+  font-size: 0.95rem;
+  color: #b0b0b0;
+  margin: 0;
+}
+
+.about-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.highlight-box {
+  padding: 30px;
+  background: rgba(0, 212, 255, 0.05);
+  border-left: 4px solid #00d4ff;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.highlight-box:hover {
+  background: rgba(0, 212, 255, 0.1);
+  transform: translateX(10px);
+}
+
+.highlight-box h4 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: #00d4ff;
+}
+
+.highlight-box p {
+  font-size: 1rem;
+  color: #d0d0d0;
+  margin: 0;
+}
+
+@media (max-width: 968px) {
+  .about-section {
+    padding: 60px 20px;
+  }
+
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .about-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .about-section {
+    padding: 40px 15px;
+  }
+
+  .about-text h3 {
+    font-size: 1.5rem;
+  }
+
+  .about-text p {
+    font-size: 1rem;
+  }
+
+  .about-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .stat {
+    padding: 15px;
+  }
+
+  .stat h4 {
+    font-size: 1.5rem;
+  }
+
+  .highlight-box {
+    padding: 20px;
+  }
+
+  .highlight-box h4 {
+    font-size: 1.1rem;
+  }
+}
