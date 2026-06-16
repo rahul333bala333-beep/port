@@ -1,6 +1,7 @@
 import { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
+import { useProfile } from '../../context/ProfileContext';
 
 function createDeterministicRandom(seed) {
   let s = seed;
@@ -12,6 +13,7 @@ function createDeterministicRandom(seed) {
 
 export default function ParticleField({ count = 1500, color = '#915EFF', spread = 20, speed = 0.15 }) {
   const meshRef = useRef();
+  const { profile } = useProfile();
 
   const particles = useMemo(() => {
     const positions = new Float32Array(count * 3);
@@ -37,6 +39,14 @@ export default function ParticleField({ count = 1500, color = '#915EFF', spread 
     }
     meshRef.current.geometry.attributes.position.needsUpdate = true;
     meshRef.current.rotation.y = time * 0.05;
+
+    if (meshRef.current.material) {
+      if (profile.rgbMode && window.rgbPrimary) {
+        meshRef.current.material.color.set(window.rgbPrimary);
+      } else {
+        meshRef.current.material.color.set(color);
+      }
+    }
   });
 
   return (

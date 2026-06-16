@@ -323,3 +323,103 @@ input:checked + .slider:before {
     bottom: 65px;
   }
 }
+
+/* Font / Typography Presets */
+.font-presets {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.font-preset-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-smooth);
+  text-align: center;
+  font-family: var(--font-heading);
+}
+
+.font-preset-btn:hover {
+  background: rgba(145, 94, 255, 0.1);
+  border-color: rgba(145, 94, 255, 0.3);
+  color: #fff;
+}
+
+.font-preset-btn.active {
+  background: var(--gradient-primary);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(145, 94, 255, 0.25);
+}
+
+/* Custom Font Dropdowns */
+.custom-font-selectors {
+  display: flex;
+  gap: 12px;
+}
+
+.font-select-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.font-select-item label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.font-select {
+  background: rgba(10, 15, 36, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-primary);
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  outline: none;
+  cursor: pointer;
+  width: 100%;
+  transition: border-color 0.25s;
+}
+
+.font-select:focus {
+  border-color: var(--accent-primary);
+}
+
+/* RGB Active state banner */
+.rgb-banner {
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, rgba(255, 0, 127, 0.15), rgba(127, 0, 255, 0.15), rgba(0, 206, 245, 0.15));
+  border: 1px solid rgba(145, 94, 255, 0.2);
+  color: #fff;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  font-weight: 500;
+  text-align: center;
+  animation: rgb-banner-flow 6s linear infinite;
+  background-size: 200% auto;
+}
+
+@keyframes rgb-banner-flow {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Disabled state for control groups */
+.disabled-group {
+  opacity: 0.45;
+  pointer-events: none;
+  filter: grayscale(40%);
+  transition: all 0.3s ease;
+}

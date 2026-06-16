@@ -5,16 +5,28 @@ import { OrbitControls, Icosahedron, TorusKnot, Sphere, Box, Torus } from '@reac
 import gsap from 'gsap';
 import { useProfile } from '../context/ProfileContext';
 import SceneBackground from './3d/SceneBackground';
+import profilePhoto from '../assets/profile.png';
 import '../styles/Hero.css';
 
 function RotatingShape({ type, wireframe, color, secondaryColor, speedMultiplier }) {
   const meshRef = useRef();
+  const { profile } = useProfile();
 
   useFrame((state) => {
     if (meshRef.current) {
       const speed = speedMultiplier !== undefined ? speedMultiplier : 1.0;
       meshRef.current.rotation.x = state.clock.elapsedTime * 0.3 * speed;
       meshRef.current.rotation.y = state.clock.elapsedTime * 0.5 * speed;
+
+      if (meshRef.current.material) {
+        if (profile.rgbMode && window.rgbPrimary && window.rgbSecondary) {
+          meshRef.current.material.color.set(window.rgbPrimary);
+          meshRef.current.material.emissive.set(window.rgbSecondary);
+        } else {
+          meshRef.current.material.color.set(color || '#915EFF');
+          meshRef.current.material.emissive.set(secondaryColor || '#00CEF5');
+        }
+      }
     }
   });
 
@@ -86,43 +98,46 @@ export default function Hero() {
     }
   }, [profile]);
 
+  const hasRightElement = true; // Always has right element (3D canvas or profile photo)
+
   return (
-    <section className="hero">
+    <section className={`hero ${!hasRightElement ? 'no-shape' : ''}`}>
       {/* Ambient page background from 3D Control Center */}
       <SceneBackground fallback="particles" />
 
-      {/* Main interactive 3D shape */}
-      <div className="hero-canvas-container">
-        <Canvas camera={{ position: [0, 0, 3.5] }}>
-          <ambientLight intensity={0.6} />
-          <pointLight position={[5, 5, 5]} intensity={1.5} />
-          <pointLight position={[-5, -5, 5]} intensity={1} />
-          <RotatingShape
-            type={profile.heroGeometry || 'icosahedron'}
-            wireframe={profile.wireframe}
-            color={profile.themeColor}
-            secondaryColor={profile.themeSecondaryColor}
-            speedMultiplier={profile.speedMultiplier}
-          />
-          <OrbitControls enableZoom={false} autoRotate={false} />
-        </Canvas>
-      </div>
-
       <div className="hero-content">
+        <div className="hero-badge">Welcome To My Portfolio</div>
+        
         <h1 className="hero-title">
           Hi, I'm <span className="gradient-text">{profile.name}</span>
         </h1>
         <p className="hero-subtitle">
           {profile.subtitle}
         </p>
+        <p className="hero-description">
+          {profile.bio}
+        </p>
 
         <div className="hero-buttons">
-          <Link to="/projects" className="btn btn-primary">
-            Explore My Work
+          <Link to="/contact" className="btn btn-primary">
+            Hire Me
           </Link>
-          <Link to="/contact" className="btn btn-secondary">
-            Get In Touch
-          </Link>
+          {profile.resumeUrl ? (
+            <a 
+              href={profile.resumeUrl} 
+              download={`${profile.name.replace(/\s+/g, '_')}_Resume.pdf`} 
+              className="btn btn-secondary"
+            >
+              Download Resume
+            </a>
+          ) : (
+            <button 
+              className="btn btn-secondary" 
+              onClick={() => alert("Resume not uploaded yet. Please unlock the Profile Editor (using ?edit=true in the URL) and upload your resume PDF.")}
+            >
+              Download Resume
+            </button>
+          )}
         </div>
 
         <div className="hero-info">
@@ -140,6 +155,36 @@ export default function Hero() {
           </div>
         </div>
       </div>
+
+      {/* Main interactive 3D shape OR Profile Photo */}
+      {profile.showHeroShape !== false ? (
+        <div className="hero-canvas-container">
+          <Canvas camera={{ position: [0, 0, 3.5] }}>
+            <ambientLight intensity={0.6} />
+            <pointLight position={[5, 5, 5]} intensity={1.5} />
+            <pointLight position={[-5, -5, 5]} intensity={1} />
+            <RotatingShape
+              type={profile.heroGeometry || 'icosahedron'}
+              wireframe={profile.wireframe}
+              color={profile.themeColor}
+              secondaryColor={profile.themeSecondaryColor}
+              speedMultiplier={profile.speedMultiplier}
+            />
+            <OrbitControls enableZoom={false} autoRotate={false} />
+          </Canvas>
+        </div>
+      ) : (
+        <div className="hero-photo-container">
+          <div className="hero-photo-card glass-card">
+            <div className="hero-photo-glow"></div>
+            <img 
+              src={profile.photoUrl || profilePhoto} 
+              alt={profile.name} 
+              className="hero-profile-img" 
+            />
+          </div>
+        </div>
+      )}
 
       <div className="scroll-indicator">
         <span>Scroll to explore</span>

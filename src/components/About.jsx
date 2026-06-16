@@ -3,6 +3,7 @@ import SceneBackground from './3d/SceneBackground';
 import { useProfile } from '../context/ProfileContext';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import profilePhoto from '../assets/profile.png';
 import '../styles/About.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -58,6 +59,14 @@ export default function About() {
           </div>
 
           <div className="about-highlights">
+            <div className="about-photo-card glass-card">
+              <div className="about-photo-glow"></div>
+              <img 
+                src={profile.photoUrl || profilePhoto} 
+                alt={profile.name} 
+                className="about-photo-img" 
+              />
+            </div>
             <div className="highlight-box glass-card">
               <h4>🎓 Education</h4>
               <p>{profile.degree} from {profile.college}</p>

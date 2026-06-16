@@ -3,6 +3,10 @@ import { useProfile } from '../../context/ProfileContext';
 import ParticleField from './ParticleField';
 import FloatingShapes from './FloatingShapes';
 import GlowOrb from './GlowOrb';
+import DNAHelix from './DNAHelix';
+import GalaxySpiral from './GalaxySpiral';
+import MeteorShower from './MeteorShower';
+import NeonGrid from './NeonGrid';
 
 /**
  * Shared 3D background that reads `profile.backgroundType` from context
@@ -53,6 +57,38 @@ export default function SceneBackground({ fallback = 'particles' }) {
             color={primary}
             size={1.3}
             pulseSpeed={0.6 * speed}
+          />
+        )}
+
+        {activeBg === 'dna' && (
+          <DNAHelix
+            color={primary}
+            secondaryColor={secondary}
+            speed={speed}
+          />
+        )}
+
+        {activeBg === 'galaxy' && (
+          <GalaxySpiral
+            color={primary}
+            secondaryColor={secondary}
+            speed={speed}
+          />
+        )}
+
+        {activeBg === 'meteor' && (
+          <MeteorShower
+            color={primary}
+            secondaryColor={secondary}
+            speed={speed}
+          />
+        )}
+
+        {activeBg === 'grid' && (
+          <NeonGrid
+            color={primary}
+            secondaryColor={secondary}
+            speed={speed}
           />
         )}
       </Canvas>

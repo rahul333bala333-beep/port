@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import SceneBackground from './3d/SceneBackground';
+import { skillsData } from '../data/portfolioData';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import '../styles/Skills.css';
@@ -43,17 +44,6 @@ function SkillBox({ skill, level }) {
 }
 
 export default function Skills() {
-  const skillsData = [
-    { skill: 'HTML5', level: 90 },
-    { skill: 'CSS3', level: 85 },
-    { skill: 'JavaScript', level: 80 },
-    { skill: 'React', level: 75 },
-    { skill: 'Git & GitHub', level: 85 },
-    { skill: 'UI/UX Design', level: 80 },
-    { skill: 'Cybersecurity', level: 70 },
-    { skill: 'Problem Solving', level: 85 },
-  ];
-
   return (
     <section id="skills" className="skills-section page-enter">
       <SceneBackground fallback="shapes" />

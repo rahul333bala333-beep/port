@@ -1,5 +1,6 @@
 import { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
+import { useProfile } from '../../context/ProfileContext';
 
 function createDeterministicRandom(seed) {
   let s = seed;
@@ -11,6 +12,7 @@ function createDeterministicRandom(seed) {
 
 function Shape({ position, geometry, color, speed, rotationAxis, offset }) {
   const meshRef = useRef();
+  const { profile } = useProfile();
 
   useFrame((state) => {
     if (!meshRef.current) return;
@@ -19,6 +21,17 @@ function Shape({ position, geometry, color, speed, rotationAxis, offset }) {
     meshRef.current.rotation.y = t * rotationAxis[1];
     meshRef.current.rotation.z = t * rotationAxis[2];
     meshRef.current.position.y = position[1] + Math.sin(t) * 0.3;
+
+    if (meshRef.current.material) {
+      if (profile.rgbMode && window.rgbPrimary && window.rgbSecondary) {
+        const activeColor = offset > Math.PI ? window.rgbPrimary : window.rgbSecondary;
+        meshRef.current.material.color.set(activeColor);
+        meshRef.current.material.emissive.set(activeColor);
+      } else {
+        meshRef.current.material.color.set(color);
+        meshRef.current.material.emissive.set(color);
+      }
+    }
   });
 
   return (

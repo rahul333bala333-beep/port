@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useProfile } from '../context/ProfileContext';
 import '../styles/Navigation.css';
 
-export default function Navigation({ onOpenEditor }) {
+export default function Navigation({ onOpenEditor, canEdit }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { profile } = useProfile();
 
@@ -51,25 +51,27 @@ export default function Navigation({ onOpenEditor }) {
               </NavLink>
             </li>
           ))}
-          <li className="nav-item nav-action-item">
-            <button 
-              className="profile-toggle-btn" 
-              onClick={() => {
-                onOpenEditor();
-                setIsMenuOpen(false);
-              }}
-              title="Edit Profile"
-            >
-              {profile?.photoUrl ? (
-                <img src={profile.photoUrl} alt={profile.name} className="nav-avatar" />
-              ) : (
-                <div className="nav-avatar-fallback">
-                  <span>👤</span>
-                </div>
-              )}
-              <span className="profile-toggle-text">Edit Profile</span>
-            </button>
-          </li>
+          {canEdit && (
+            <li className="nav-item nav-action-item">
+              <button 
+                className="profile-toggle-btn" 
+                onClick={() => {
+                  onOpenEditor();
+                  setIsMenuOpen(false);
+                }}
+                title="Edit Profile"
+              >
+                {profile?.photoUrl ? (
+                  <img src={profile.photoUrl} alt={profile.name} className="nav-avatar" />
+                ) : (
+                  <div className="nav-avatar-fallback">
+                    <span>👤</span>
+                  </div>
+                )}
+                <span className="profile-toggle-text">Edit Profile</span>
+              </button>
+            </li>
+          )}
         </ul>
       </div>
     </nav>

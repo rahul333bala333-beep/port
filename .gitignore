@@ -12,6 +12,18 @@ dist
 dist-ssr
 *.local
 
+# Environment variables / secrets (keep .env.example tracked)
+.env
+.env.local
+.env.*.local
+
+# Netlify local dev artifacts (functions are committed under netlify/functions)
+.netlify/
+deno.lock
+
+# Local-only Claude Code settings (keep launch.json tracked)
+.claude/settings.local.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

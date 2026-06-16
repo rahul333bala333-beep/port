@@ -146,6 +146,22 @@
   font-size: 0.85rem !important;
 }
 
+.editor-lock {
+  flex: 1;
+  padding: 12px !important;
+  font-size: 0.85rem !important;
+  border-color: #f43f5e !important;
+  color: #f43f5e !important;
+  background: transparent;
+  border: 2px solid #f43f5e;
+}
+
+.editor-lock:hover {
+  background: #f43f5e !important;
+  color: #fff !important;
+  box-shadow: 0 12px 30px rgba(244, 63, 94, 0.3) !important;
+}
+
 @media (max-width: 480px) {
   .profile-editor {
     width: 100vw;
@@ -158,3 +174,541 @@
     padding-right: var(--space-md);
   }
 }
+
+/* Profile Photo Uploader Section */
+.profile-photo-section {
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--border-glass);
+  margin-bottom: var(--space-sm);
+}
+
+.photo-editor-container {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  margin-top: 8px;
+}
+
+.photo-preview-wrapper {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgba(145, 94, 255, 0.1);
+  border: 2px solid var(--accent-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 15px rgba(145, 94, 255, 0.2);
+  flex-shrink: 0;
+}
+
+.photo-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-preview-fallback {
+  font-size: 2.2rem;
+  color: var(--text-muted);
+}
+
+.photo-upload-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.photo-upload-label {
+  cursor: pointer;
+  padding: 8px 16px !important;
+  font-size: 0.8rem !important;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(145, 94, 255, 0.15) !important;
+  border: 1px solid var(--border-glass) !important;
+  color: var(--text-primary) !important;
+  transition: all 0.3s ease;
+}
+
+.photo-upload-label:hover {
+  background: var(--accent-primary) !important;
+  color: #fff !important;
+  box-shadow: 0 0 15px rgba(145, 94, 255, 0.3);
+}
+
+.photo-remove-btn {
+  padding: 6px 12px !important;
+  font-size: 0.75rem !important;
+  border-radius: var(--radius-sm);
+  color: #f43f5e !important;
+  border-color: rgba(244, 63, 94, 0.2) !important;
+  background: rgba(244, 63, 94, 0.05) !important;
+}
+
+.photo-remove-btn:hover {
+  background: #f43f5e !important;
+  color: #fff !important;
+  box-shadow: 0 0 15px rgba(244, 63, 94, 0.3);
+}
+
+.photo-size-limit-info {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.photo-url-fallback {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fallback-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.photo-url-fallback input {
+  padding: 8px 12px;
+  font-size: 0.85rem;
+}
+
+/* Profile Resume Uploader Section */
+.profile-resume-section {
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--border-glass);
+  margin-bottom: var(--space-sm);
+}
+
+.resume-editor-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.resume-status-badge {
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  background: rgba(244, 63, 94, 0.1);
+  border: 1px solid rgba(244, 63, 94, 0.2);
+  color: #f43f5e;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: inline-block;
+  align-self: flex-start;
+}
+
+.resume-status-badge.uploaded {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+}
+
+.resume-upload-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.resume-upload-label {
+  cursor: pointer;
+  padding: 8px 16px !important;
+  font-size: 0.8rem !important;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(145, 94, 255, 0.15) !important;
+  border: 1px solid var(--border-glass) !important;
+  color: var(--text-primary) !important;
+  transition: all 0.3s ease;
+}
+
+.resume-upload-label:hover {
+  background: var(--accent-primary) !important;
+  color: #fff !important;
+  box-shadow: 0 0 15px rgba(145, 94, 255, 0.3);
+}
+
+.resume-remove-btn {
+  padding: 6px 12px !important;
+  font-size: 0.75rem !important;
+  border-radius: var(--radius-sm);
+  color: #f43f5e !important;
+  border-color: rgba(244, 63, 94, 0.2) !important;
+  background: rgba(244, 63, 94, 0.05) !important;
+}
+
+.resume-remove-btn:hover {
+  background: #f43f5e !important;
+  color: #fff !important;
+  box-shadow: 0 0 15px rgba(244, 63, 94, 0.3);
+}
+
+.resume-size-limit-info {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+/* Certifications Section Divider */
+.editor-section-divider {
+  margin: 24px 0 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--accent-secondary, #00CEF5);
+  letter-spacing: 0.15em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.editor-section-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(0, 206, 245, 0.3), transparent);
+}
+
+/* Certifications Manager */
+.profile-certs-section {
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-glass);
+}
+
+.certs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+  max-height: 250px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.cert-list-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cert-list-thumb {
+  width: 45px;
+  height: 45px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cert-list-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cert-list-thumb-placeholder {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+}
+
+.cert-list-info {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.cert-list-info h4 {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cert-list-info p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.cert-list-category-select {
+  margin-top: 6px;
+  padding: 3px 8px;
+  font-size: 0.72rem;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--accent-border, rgba(170, 59, 255, 0.5));
+  border-radius: var(--radius-sm, 8px);
+  cursor: pointer;
+  max-width: 100%;
+}
+
+.cert-list-category-select:focus {
+  outline: none;
+  border-color: var(--accent, #aa3bff);
+}
+
+.cert-delete-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 6px;
+  font-size: 1rem;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
+}
+
+.cert-delete-btn:hover {
+  background: rgba(244, 63, 94, 0.15);
+  color: #f43f5e;
+}
+
+.no-certs-info {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px dashed rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-sm);
+}
+
+/* Add Certificate Form */
+.add-cert-form {
+  margin-top: 16px;
+  padding: 16px;
+  background: rgba(145, 94, 255, 0.03) !important;
+  border: 1px solid rgba(145, 94, 255, 0.1) !important;
+  border-radius: var(--radius-sm);
+}
+
+.add-cert-form h5 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.add-cert-form h5::before {
+  content: '＋';
+  color: var(--accent-primary);
+  font-weight: bold;
+}
+
+.add-cert-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.add-cert-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.add-cert-col label {
+  font-size: 0.7rem !important;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: none !important;
+  letter-spacing: normal !important;
+}
+
+.add-cert-col input {
+  padding: 8px 12px !important;
+  font-size: 0.8rem !important;
+  background: rgba(0, 0, 0, 0.2) !important;
+}
+
+/* File Uploaders Widgets */
+.file-upload-row {
+  margin-top: 6px;
+}
+
+.file-uploader-widget {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  border: 1px dashed var(--border-glass);
+  border-radius: var(--radius-sm);
+  padding: 6px;
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.file-uploader-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.file-widget-label {
+  cursor: pointer;
+  padding: 4px 8px !important;
+  font-size: 0.7rem !important;
+  border-radius: 4px !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #fff !important;
+}
+
+.file-widget-label:hover {
+  background: var(--accent-primary) !important;
+  border-color: transparent !important;
+}
+
+.file-info-text {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.widget-preview {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 10px;
+}
+
+.widget-preview img {
+  height: 32px;
+  width: auto;
+  max-width: 60px;
+  object-fit: cover;
+  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.widget-preview.text-preview {
+  padding: 0 4px;
+}
+
+.pdf-icon {
+  font-size: 1.1rem;
+}
+
+.pdf-name {
+  font-size: 0.7rem;
+  color: #10b981;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 90px;
+}
+
+.widget-clear {
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  transition: all 0.2s ease;
+}
+
+.widget-clear:hover {
+  background: #f43f5e;
+  color: #fff;
+}
+
+.fallback-input-url {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 6px;
+}
+
+.fallback-input-url span {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.fallback-input-url input {
+  padding: 4px 8px !important;
+  font-size: 0.75rem !important;
+  height: 28px;
+}
+
+.btn-add-cert {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px !important;
+  font-size: 0.8rem !important;
+  border-radius: var(--radius-sm);
+  background: rgba(145, 94, 255, 0.15) !important;
+  border: 1px solid var(--accent-primary) !important;
+  color: var(--text-primary) !important;
+}
+
+.btn-add-cert:hover {
+  background: var(--gradient-primary) !important;
+  color: #fff !important;
+  border-color: transparent !important;
+  box-shadow: 0 5px 15px rgba(145, 94, 255, 0.3);
+}
+
+/* Editor Certifications loading state */
+.editor-certs-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 30px 0;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  width: 100%;
+}
+
+.editor-certs-spinner {
+  width: 28px;
+  height: 28px;
+  border: 2px solid rgba(145, 94, 255, 0.1);
+  border-top-color: var(--accent-primary);
+  border-radius: 50%;
+  animation: editor-certs-spin 1s linear infinite;
+}
+
+@keyframes editor-certs-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.btn-add-cert:disabled,
+.file-widget-label.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
