@@ -3,6 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Icosahedron, TorusKnot, Sphere, Box, Torus } from '@react-three/drei';
 import gsap from 'gsap';
 import { useProfile } from '../context/ProfileContext';
+import { useInView } from '../hooks/useInView';
 import SceneBackground from './3d/SceneBackground';
 import profilePhoto from '../assets/profile.png';
 import '../styles/Hero.css';
@@ -75,6 +76,7 @@ function RotatingShape({ type, wireframe, color, secondaryColor, speedMultiplier
 
 export default function Hero() {
   const { profile } = useProfile();
+  const [canvasRef, canvasInView] = useInView(200);
 
   useEffect(() => {
     const titleElement = document.querySelector('.hero-title');
@@ -157,20 +159,26 @@ export default function Hero() {
 
       {/* Main interactive 3D shape OR Profile Photo */}
       {profile.showHeroShape !== false ? (
-        <div className="hero-canvas-container">
-          <Canvas camera={{ position: [0, 0, 3.5] }}>
-            <ambientLight intensity={0.6} />
-            <pointLight position={[5, 5, 5]} intensity={1.5} />
-            <pointLight position={[-5, -5, 5]} intensity={1} />
-            <RotatingShape
-              type={profile.heroGeometry || 'icosahedron'}
-              wireframe={profile.wireframe}
-              color={profile.themeColor}
-              secondaryColor={profile.themeSecondaryColor}
-              speedMultiplier={profile.speedMultiplier}
-            />
-            <OrbitControls enableZoom={false} autoRotate={false} />
-          </Canvas>
+        <div className="hero-canvas-container" ref={canvasRef}>
+          {canvasInView && (
+            <Canvas
+              camera={{ position: [0, 0, 3.5] }}
+              dpr={[1, 1.5]}
+              gl={{ antialias: false, powerPreference: 'high-performance' }}
+            >
+              <ambientLight intensity={0.6} />
+              <pointLight position={[5, 5, 5]} intensity={1.5} />
+              <pointLight position={[-5, -5, 5]} intensity={1} />
+              <RotatingShape
+                type={profile.heroGeometry || 'icosahedron'}
+                wireframe={profile.wireframe}
+                color={profile.themeColor}
+                secondaryColor={profile.themeSecondaryColor}
+                speedMultiplier={profile.speedMultiplier}
+              />
+              <OrbitControls enableZoom={false} autoRotate={false} />
+            </Canvas>
+          )}
         </div>
       ) : (
         <div className="hero-photo-container">

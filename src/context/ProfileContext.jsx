@@ -26,7 +26,7 @@ const defaultProfile = {
   themeColor: '#915EFF',
   themeSecondaryColor: '#00CEF5',
   heroGeometry: 'icosahedron',
-  showHeroShape: true,
+  showHeroShape: false,
   wireframe: true,
   backgroundType: 'default',
   speedMultiplier: 1.0,

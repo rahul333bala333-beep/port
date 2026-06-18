@@ -1,5 +1,6 @@
 import { Canvas } from '@react-three/fiber';
 import { useProfile } from '../../context/ProfileContext';
+import { useInView } from '../../hooks/useInView';
 import ParticleField from './ParticleField';
 import FloatingShapes from './FloatingShapes';
 import GlowOrb from './GlowOrb';
@@ -17,6 +18,7 @@ import NeonGrid from './NeonGrid';
  */
 export default function SceneBackground({ fallback = 'particles' }) {
   const { profile } = useProfile();
+  const [ref, inView] = useInView(250);
 
   const activeBg = profile.backgroundType === 'default'
     ? fallback
@@ -29,14 +31,19 @@ export default function SceneBackground({ fallback = 'particles' }) {
   const secondary = profile.themeSecondaryColor || '#00CEF5';
 
   return (
-    <div className="canvas-bg">
-      <Canvas camera={{ position: [0, 0, 6] }}>
+    <div className="canvas-bg" ref={ref}>
+      {inView && (
+      <Canvas
+        camera={{ position: [0, 0, 6] }}
+        dpr={[1, 1.5]}
+        gl={{ antialias: false, powerPreference: 'high-performance' }}
+      >
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} intensity={1.2} />
 
         {activeBg === 'particles' && (
           <ParticleField
-            count={1200}
+            count={700}
             color={primary}
             spread={18}
             speed={0.14 * speed}
@@ -92,6 +99,7 @@ export default function SceneBackground({ fallback = 'particles' }) {
           />
         )}
       </Canvas>
+      )}
     </div>
   );
 }
