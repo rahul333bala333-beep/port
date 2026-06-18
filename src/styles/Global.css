@@ -64,6 +64,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* keep section titles clear of the fixed navbar */
   font-size: 16px;
 }
 

@@ -1,5 +1,4 @@
 import { useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Icosahedron, TorusKnot, Sphere, Box, Torus } from '@react-three/drei';
 import gsap from 'gsap';
@@ -101,7 +100,7 @@ export default function Hero() {
   const hasRightElement = true; // Always has right element (3D canvas or profile photo)
 
   return (
-    <section className={`hero ${!hasRightElement ? 'no-shape' : ''}`}>
+    <section id="home" className={`hero ${!hasRightElement ? 'no-shape' : ''}`}>
       {/* Ambient page background from 3D Control Center */}
       <SceneBackground fallback="particles" />
 
@@ -119,9 +118,9 @@ export default function Hero() {
         </p>
 
         <div className="hero-buttons">
-          <Link to="/contact" className="btn btn-primary">
+          <a href="#contact" className="btn btn-primary">
             Hire Me
-          </Link>
+          </a>
           {profile.resumeUrl ? (
             <a 
               href={profile.resumeUrl} 

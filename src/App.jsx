@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -11,7 +10,6 @@ import Navigation from './components/Navigation';
 import ProfileEditor from './components/ProfileEditor';
 import ThreeDControlCenter from './components/ThreeDControlCenter';
 import AIChatbot from './components/AIChatbot';
-import PageTransition from './components/PageTransition';
 import { useProfile } from './context/ProfileContext';
 
 function hexToRgb(hex) {
@@ -26,7 +24,6 @@ function hexToRgb(hex) {
 function App() {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const { profile } = useProfile();
-  const location = useLocation();
 
   const [canEdit, setCanEdit] = useState(() => {
     return localStorage.getItem('portfolio_edit_access') === 'true';
@@ -52,7 +49,7 @@ function App() {
       const newUrl = window.location.pathname + window.location.hash;
       window.history.replaceState({}, document.title, newUrl);
     }
-  }, [location]);
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -137,14 +134,12 @@ function App() {
       <Navigation onOpenEditor={() => setIsEditorOpen(true)} canEdit={canEdit} />
       
       <main className="page-content">
-        <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<PageTransition><Hero /></PageTransition>} />
-          <Route path="/about" element={<PageTransition><About /></PageTransition>} />
-          <Route path="/skills" element={<PageTransition><Skills /></PageTransition>} />
-          <Route path="/experience" element={<PageTransition><Experience /></PageTransition>} />
-          <Route path="/projects" element={<PageTransition><Projects /></PageTransition>} />
-          <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
-        </Routes>
+        <Hero />
+        <About />
+        <Skills />
+        <Experience />
+        <Projects />
+        <Contact />
       </main>
 
       <ProfileEditor 

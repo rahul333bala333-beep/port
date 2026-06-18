@@ -173,6 +173,13 @@
   font-size: 1.1rem;
 }
 
+/* GitHub-only Projects section: a single centered call-to-action card. */
+.projects-github-only {
+  max-width: 620px;
+  margin: 40px auto 0;
+  padding: 50px 30px;
+}
+
 @media (max-width: 968px) {
   .projects-section {
     padding: 60px 20px;

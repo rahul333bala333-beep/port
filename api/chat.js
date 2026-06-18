@@ -1,38 +1,35 @@
-// Secure server-side proxy to Google Gemini. The API key lives only here
-// (GEMINI_API_KEY in Netlify env vars) and is never shipped to the browser.
-// gemini-flash-latest is the primary free-tier model; flash-lite is a fallback
-// used when the primary is briefly overloaded (429/503). 2.0-flash has 0 free quota.
+// Vercel serverless function — secure proxy to Google Gemini.
+// The API key lives only here (GEMINI_API_KEY in Vercel env vars) and is
+// never shipped to the browser. Mirrors the Netlify function so the chat
+// works identically on Vercel.
 const MODELS = ['gemini-flash-latest', 'gemini-flash-lite-latest'];
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-export default async (req) => {
-  const json = (obj, status = 200) =>
-    new Response(JSON.stringify(obj), {
-      status,
-      headers: { 'Content-Type': 'application/json' },
-    });
-
+export default async function handler(req, res) {
   if (req.method !== 'POST') {
-    return json({ error: 'Method not allowed' }, 405);
+    res.status(405).json({ error: 'Method not allowed' });
+    return;
   }
 
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
-    return json(
-      { error: 'The AI assistant is not configured yet. Add GEMINI_API_KEY in your Netlify environment variables.' },
-      503
-    );
+    res.status(503).json({
+      error: 'The AI assistant is not configured yet. Add GEMINI_API_KEY in your Vercel environment variables.',
+    });
+    return;
   }
 
-  let body;
-  try {
-    body = await req.json();
-  } catch {
-    return json({ error: 'Invalid request body.' }, 400);
+  // Vercel usually parses JSON bodies, but guard for string/raw bodies.
+  let body = req.body;
+  if (typeof body === 'string') {
+    try {
+      body = JSON.parse(body);
+    } catch {
+      body = {};
+    }
   }
-
-  const { messages = [], context = '' } = body;
+  const { messages = [], context = '' } = body || {};
 
   const systemPrompt = `You are the friendly AI assistant embedded in a developer's personal portfolio website.
 Answer visitors' questions about this person using ONLY the portfolio data provided below.
@@ -61,10 +58,9 @@ ${context}`;
     generationConfig: { temperature: 0.6, maxOutputTokens: 1024 },
   };
 
-  // Try each model once (kept short to stay within the ~10s function timeout).
-  // Transient overload (429/500/503) or a network blip falls through to the
-  // next model. If everything fails we still return a friendly message as a
-  // normal reply, so the chat never shows a scary error code to visitors.
+  // Try each model once; transient overload (429/500/503) or a network blip
+  // falls through to the next model. If all fail, return a friendly message
+  // as a normal reply so the chat never shows a scary error code.
   for (let i = 0; i < MODELS.length; i++) {
     const model = MODELS[i];
     try {
@@ -82,9 +78,11 @@ ${context}`;
       if (resp.ok) {
         const data = await resp.json();
         const reply = data?.candidates?.[0]?.content?.parts?.map((p) => p.text).join('') || '';
-        if (reply.trim()) return json({ reply });
+        if (reply.trim()) {
+          res.status(200).json({ reply });
+          return;
+        }
       } else if (![429, 500, 503].includes(resp.status)) {
-        // Non-transient (e.g. 400/403) — trying the other model won't help.
         break;
       }
     } catch {
@@ -93,8 +91,8 @@ ${context}`;
     if (i < MODELS.length - 1) await sleep(400);
   }
 
-  return json({
+  res.status(200).json({
     reply:
       "I'm getting a lot of requests right now and couldn't finish that one. Please try again in a few seconds. 🙏",
   });
-};
+}

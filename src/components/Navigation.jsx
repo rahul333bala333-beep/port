@@ -1,20 +1,47 @@
-import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { useProfile } from '../context/ProfileContext';
 import '../styles/Navigation.css';
 
+const navLinks = [
+  { id: 'home', label: 'Home' },
+  { id: 'about', label: 'About' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'contact', label: 'Contact' },
+];
+
 export default function Navigation({ onOpenEditor, canEdit }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [active, setActive] = useState('home');
   const { profile } = useProfile();
 
-  const navLinks = [
-    { id: 'home', label: 'Home', path: '/' },
-    { id: 'about', label: 'About', path: '/about' },
-    { id: 'skills', label: 'Skills', path: '/skills' },
-    { id: 'experience', label: 'Experience', path: '/experience' },
-    { id: 'projects', label: 'Projects', path: '/projects' },
-    { id: 'contact', label: 'Contact', path: '/contact' },
-  ];
+  // Scroll-spy: highlight the nav link for the section currently in view.
+  useEffect(() => {
+    const sections = navLinks
+      .map((l) => document.getElementById(l.id))
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      },
+      { rootMargin: '-45% 0px -50% 0px' }
+    );
+
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
+
+  const handleNav = (e, id) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+    setActive(id);
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const getInitials = (name) => {
     if (!name) return 'BR';
@@ -29,9 +56,9 @@ export default function Navigation({ onOpenEditor, canEdit }) {
   return (
     <nav className="navbar">
       <div className="nav-container">
-        <NavLink to="/" className="nav-logo" onClick={() => setIsMenuOpen(false)}>
+        <a href="#home" className="nav-logo" onClick={(e) => handleNav(e, 'home')}>
           <span className="logo-text">{getInitials(profile?.name)}</span>
-        </NavLink>
+        </a>
 
         <div className="hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           <span></span>
@@ -42,19 +69,19 @@ export default function Navigation({ onOpenEditor, canEdit }) {
         <ul className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
           {navLinks.map((link) => (
             <li key={link.id} className="nav-item">
-              <NavLink
-                to={link.path}
-                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
-                onClick={() => setIsMenuOpen(false)}
+              <a
+                href={`#${link.id}`}
+                className={`nav-link ${active === link.id ? 'active' : ''}`}
+                onClick={(e) => handleNav(e, link.id)}
               >
                 {link.label}
-              </NavLink>
+              </a>
             </li>
           ))}
           {canEdit && (
             <li className="nav-item nav-action-item">
-              <button 
-                className="profile-toggle-btn" 
+              <button
+                className="profile-toggle-btn"
                 onClick={() => {
                   onOpenEditor();
                   setIsMenuOpen(false);
